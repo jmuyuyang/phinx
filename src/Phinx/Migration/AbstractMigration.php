@@ -109,6 +109,19 @@ abstract class AbstractMigration implements MigrationInterface
     }
 
     /**
+     * init database schema
+     * @param $schemaConn
+     */
+    public function initSchema($schemaConn){
+        $adapter = Schema::connection($schemaConn);
+        if($adapter){
+            $this->setAdapter($adapter);
+        }else{
+            throw new \Exception("unknown database schema ".$schemaConn);
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function setAdapter(AdapterInterface $adapter)

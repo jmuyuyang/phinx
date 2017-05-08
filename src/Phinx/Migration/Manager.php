@@ -455,7 +455,7 @@ class Manager
         if (null === $target) {
             // Get the migration before the last run migration
             $prev = count($executedVersionCreationTimes) - 2;
-            $target = $prev >= 0 ? $executedVersionCreationTimes[$prev] : 0;
+            $target = $prev >= 0 ? $executedVersionCreationTimes[$prev] : $executedVersionCreationTimes[0];
         }
 
         // If the target must match a version, check the target version exists
@@ -814,6 +814,7 @@ class Manager
     public function setConfig(ConfigInterface $config)
     {
         $this->config = $config;
+        Schema::setConfig($config);
         return $this;
     }
 
